@@ -1,33 +1,33 @@
 # typed: true
 # frozen_string_literal: true
 
-# Gardenlogin is a formula for installing Gardenlogin
 class Gardenlogin < Formula
-  desc "Command-line tool for authenticating with Gardener clusters"
-  homepage "https://gardener.cloud"
-  version "0.6.0"
+  desc      "Command-line tool for authenticating with Gardener clusters"
+  homepage  "https://gardener.cloud"
+  version   "3.021"
+
 
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/gardener/gardenlogin/releases/download/v0.6.0/gardenlogin_darwin_arm64"
-      sha256 "d5f84338063e92593bc296a6181d6332588f35132b2b63bcd2523343ae298da8"
+      url "https://github.com/grolu/gardenlogin/releases/download/v3.021/gardenlogin_darwin_arm64"
+      sha256 "d6f6b389a2f88ce053a9b61e15f6c47d315742ca50fb39538f594c139c4ad372"
     else
-      url "https://github.com/gardener/gardenlogin/releases/download/v0.6.0/gardenlogin_darwin_amd64"
-      sha256 "344f96f8845f6dd2bae3e953d0e7162fa2fd6098ff01bc2c28068043f8676d10"
+      url "https://github.com/grolu/gardenlogin/releases/download/v3.021/gardenlogin_darwin_amd64"
+      sha256 "07cb4fb2c15d3b371ce437bc73816e6d5b29b28f347ab9fd3a304450eb9240a5"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/gardener/gardenlogin/releases/download/v0.6.0/gardenlogin_linux_arm64"
-      sha256 "3c932458c884824698597a8b5edad059854ce391d69b85c693b102a965093e81"
+      url "https://github.com/grolu/gardenlogin/releases/download/v3.021/gardenlogin_linux_arm64"
+      sha256 "fa3ee0f61b32b5ee0999450ffeee4401428e56d66e4429dce41386b47a177bbd"
     else
-      url "https://github.com/gardener/gardenlogin/releases/download/v0.6.0/gardenlogin_linux_amd64"
-      sha256 "87894a729675dcedadc241be6ad52e0244e70000b180516c5d9198e0f726b9d7"
+      url "https://github.com/grolu/gardenlogin/releases/download/v3.021/gardenlogin_linux_amd64"
+      sha256 "24dd765487b04d40d300e9eb36a8d74668f1081c7444a5fc0c72dfca40866602"
       depends_on arch: :x86_64
     end
   end
 
   def install
-    bin.install stable.url.split("/")[-1] => "gardenlogin"
+    bin.install stable.url.split("/").last => "gardenlogin"
     bin.install_symlink bin/"gardenlogin" => "kubectl-gardenlogin"
   end
 
