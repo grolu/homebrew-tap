@@ -1,35 +1,34 @@
 # typed: true
 # frozen_string_literal: true
 
-# GardenctlV2 is a formula for installing Gardenctl-v2
 class GardenctlV2 < Formula
-  desc "Command-line tool for managing Gardener clusters"
-  homepage "https://gardener.cloud"
-  version "2.11.0"
-
+  desc      "Command-line tool for managing Gardener clusters"
+  homepage  "https://gardener.cloud"
+  version   "3.0.16"
   depends_on "gardener/tap/gardenlogin"
 
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/gardener/gardenctl-v2/releases/download/v2.11.0/gardenctl_v2_darwin_arm64"
-      sha256 "9b5fbd93e9f033015dfe0b34014972da12649ef9149ced947a5440adfd3acadb"
+      url "https://github.com/grolu/gardenctl-v2/releases/download/v3.0.16/gardenctl_v2_darwin_arm64"
+      sha256 "cf8c5464d16fa7cac4331ce64638f4e50f640fdeb8604fc4fb76fad86712d190"
     else
-      url "https://github.com/gardener/gardenctl-v2/releases/download/v2.11.0/gardenctl_v2_darwin_amd64"
-      sha256 "70e9e0b79bc1b4a4aaee2bcb6efc276033247903b47f6f41affcddff010ea332"
+      url "https://github.com/grolu/gardenctl-v2/releases/download/v3.0.16/gardenctl_v2_darwin_amd64"
+      sha256 "45863f6b3002613307a516eb7e9d1616b7e764ad660220d596ead6532973afe2"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/gardener/gardenctl-v2/releases/download/v2.11.0/gardenctl_v2_linux_arm64"
-      sha256 "18cbbfff3722bcd14234a8c7bab8b285a79de5f916a44e2b41ee5935386dfa53"
+      url "https://github.com/grolu/gardenctl-v2/releases/download/v3.0.16/gardenctl_v2_linux_arm64"
+      sha256 "42a1be80073bdc843d49deffa09aed66ed4a0d979c56bb3b7458be90227acf21"
     else
-      url "https://github.com/gardener/gardenctl-v2/releases/download/v2.11.0/gardenctl_v2_linux_amd64"
-      sha256 "4f07bf8f9d5618bfff5e3d2ad9d30aadb78e8192f3b4f283c89d4ab7f281d3e4"
+      url "https://github.com/grolu/gardenctl-v2/releases/download/v3.0.16/gardenctl_v2_linux_amd64"
+      sha256 "a8d7a7114470ee3ca776379bfa2c94116185b233bb90a619f5e56f9ca446e9d0"
       depends_on arch: :x86_64
     end
   end
 
   def install
-    bin.install stable.url.split("/")[-1] => "gardenctl"
+    bin.install stable.url.split("/")[-1] => "gardenlogin"
+
   end
 
   def caveats
@@ -43,6 +42,6 @@ class GardenctlV2 < Formula
   end
 
   test do
-    system "#{bin}/gardenctl", "version"
+    system bin/gardenctl, --version
   end
 end
